@@ -1,4 +1,4 @@
-[app]
+pp]
 title = Arif Sumon's Egg Therapy
 package.name = arifeggtherapy
 package.domain = org.arifsumon
