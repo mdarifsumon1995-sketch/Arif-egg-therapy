@@ -1,1 +1,1 @@
-# Arif-egg-therapy 
+cd ~/arif_egg_apk && git branch -M main && git remote add origin https://github.com/mdarifsumon1995-sketch/Arif-egg-therapy.git 2>/dev/null || true && git push -u origin main# Arif-egg-therapy 
