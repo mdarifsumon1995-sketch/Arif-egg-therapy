@@ -14,12 +14,7 @@ jobs:
       - name: Install dependencies
         run: |
           sudo apt-get update
-          sudo apt-get install -y \
-            git zip unzip openjdk-17-jdk python3-pip \
-            python3-venv autoconf libtool pkg-config \
-            zlib1g-dev libncurses5-dev libncursesw5-dev \
-            libtinfo6 cmake libffi-dev libssl-dev \
-            automake autopoint gettext
+          sudo apt-get install -y git zip unzip openjdk-17-jdk python3-pip python3-venv autoconf libtool pkg-config zlib1g-dev libncurses5-dev libncursesw5-dev libtinfo6 cmake libffi-dev libssl-dev automake autopoint gettext
 
       - name: Install Buildozer
         run: |
@@ -29,10 +24,23 @@ jobs:
       - name: Build APK
         run: |
           export PATH="$HOME/.local/bin:$PATH"
-          buildozer android debug
+          buildozer android debug 2>&1 | tee build-output.log
+          exit ${PIPESTATUS[0]}
+
+      - name: Upload build log
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: build-log
+          path: build-output.log
 
       - name: Upload APK
+        if: success()
         uses: actions/upload-artifact@v4
         with:
           name: Dim-Therapy-APK
           path: bin/*.apk
+git add .github/workflows/build-apk.yml
+git commit -m "Add build error log"
+git push
+
