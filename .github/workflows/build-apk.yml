@@ -36,6 +36,3 @@ jobs:
         with:
           name: Dim-Therapy-APK
           path: bin/*.apk
-
-:
-
